@@ -48,7 +48,8 @@ IDENTIFICADOR = [:jletter:] [:jletterdigit:]*
 DIGITO = [0-9]
 ENTERO = {DIGITO}+
 DECIMAL = {DIGITO}+\.{DIGITO}+  
-NUM_MAL = {DIGITO}+\.?[^0-9]? // de todo lo que puede haber mal
+NUM_MAL = {DIGITO}+\.?[^0-9\s]? // de todo lo que puede haber mal
+
 
 CADENA = \"([^\"])*\"
 CADENA_INCOMPLETA = \"([^\"])*
