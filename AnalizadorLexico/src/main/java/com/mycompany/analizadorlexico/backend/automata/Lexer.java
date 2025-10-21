@@ -4,6 +4,8 @@
 
 /*CABECERA*/
 package com.mycompany.analizadorlexico.backend.automata;
+import  com.mycompany.analizadorlexico.backend.automata.TipoToken;
+import  com.mycompany.analizadorlexico.backend.automata.Token;
 import java.util.ArrayList;
 
 
@@ -88,12 +90,12 @@ public class Lexer {
     "\11\0\1\1\1\2\1\3\1\4\1\5\16\0\4\6"+
     "\1\1\1\6\1\7\1\6\1\10\1\11\2\6\2\12"+
     "\1\13\1\11\1\14\1\11\1\15\1\16\12\17\2\14"+
-    "\1\6\1\11\3\6\1\10\1\20\1\21\1\22\1\23"+
-    "\1\24\2\10\1\25\3\10\1\26\1\27\1\30\2\10"+
-    "\1\31\1\32\1\33\6\10\1\12\1\34\1\12\1\6"+
-    "\1\10\1\6\1\35\1\36\1\37\1\40\1\41\3\10"+
-    "\1\42\3\10\1\43\1\44\1\45\2\10\1\46\1\47"+
-    "\1\50\1\51\5\10\1\12\1\6\1\12\1\6\6\0"+
+    "\1\6\1\11\3\6\1\20\1\21\1\22\1\23\1\24"+
+    "\1\25\2\20\1\26\3\20\1\27\1\30\1\31\2\20"+
+    "\1\32\1\33\1\34\6\20\1\12\1\6\1\12\1\6"+
+    "\1\10\1\6\1\35\1\36\1\37\1\40\1\41\3\20"+
+    "\1\42\3\20\1\43\1\44\1\45\2\20\1\46\1\47"+
+    "\1\50\1\51\5\20\1\12\1\6\1\12\1\6\6\0"+
     "\1\52\32\0\1\3\1\6\4\10\4\6\1\10\2\6"+
     "\1\0\7\6\1\10\4\6\1\10\5\6\27\10\1\6"+
     "\37\10\1\6\u01ca\10\4\6\14\10\16\6\5\10\7\6"+
@@ -353,12 +355,12 @@ public class Lexer {
 
   private static final String ZZ_ACTION_PACKED_0 =
     "\1\0\1\1\1\2\2\3\1\4\1\5\1\6\1\7"+
-    "\1\10\1\6\1\11\10\5\1\12\1\13\1\14\1\13"+
-    "\2\15\1\16\4\5\1\17\4\5\1\20\1\21\10\5"+
-    "\1\0\1\20\7\5\1\0\7\5\1\22\7\5";
+    "\1\10\1\6\1\11\10\5\1\12\1\13\1\14\1\15"+
+    "\1\16\2\17\4\5\1\20\4\5\1\21\1\22\4\5"+
+    "\2\23\4\5\1\0\1\24\1\25\25\5";
 
   private static int [] zzUnpackAction() {
-    int [] result = new int[71];
+    int [] result = new int[72];
     int offset = 0;
     offset = zzUnpackAction(ZZ_ACTION_PACKED_0, offset, result);
     return result;
@@ -385,16 +387,16 @@ public class Lexer {
   private static final String ZZ_ROWMAP_PACKED_0 =
     "\0\0\0\53\0\53\0\53\0\126\0\201\0\254\0\327"+
     "\0\327\0\327\0\u0102\0\u012d\0\u0158\0\u0183\0\u01ae\0\u01d9"+
-    "\0\u0204\0\u022f\0\u025a\0\u0285\0\53\0\53\0\u02b0\0\u02db"+
-    "\0\53\0\u0306\0\u012d\0\u0331\0\u035c\0\u0387\0\u03b2\0\254"+
-    "\0\u03dd\0\u0408\0\u0433\0\u045e\0\u0489\0\u04b4\0\u04df\0\u050a"+
-    "\0\u0535\0\u0560\0\u058b\0\u05b6\0\u05e1\0\u060c\0\u0637\0\u0662"+
-    "\0\u068d\0\u06b8\0\u06e3\0\u070e\0\u0739\0\u0764\0\u078f\0\u07ba"+
-    "\0\u07e5\0\u0810\0\u083b\0\u0866\0\u0891\0\u08bc\0\u08e7\0\53"+
-    "\0\u0912\0\u093d\0\u0968\0\u0993\0\u09be\0\u09e9\0\u0a14";
+    "\0\u0204\0\u022f\0\u025a\0\u0285\0\53\0\53\0\53\0\u02b0"+
+    "\0\u02db\0\53\0\u0306\0\u0331\0\u035c\0\u0387\0\u03b2\0\u03dd"+
+    "\0\u0408\0\u0433\0\u045e\0\u0489\0\u04b4\0\u04df\0\u050a\0\u0535"+
+    "\0\u0560\0\u058b\0\254\0\53\0\u05b6\0\u05e1\0\u060c\0\u0637"+
+    "\0\u0662\0\53\0\53\0\u068d\0\u06b8\0\u06e3\0\u070e\0\u0739"+
+    "\0\u0764\0\u078f\0\u07ba\0\u07e5\0\u0810\0\u083b\0\u0866\0\u0891"+
+    "\0\u08bc\0\u08e7\0\u0912\0\u093d\0\u0968\0\u0993\0\u09be\0\u09e9";
 
   private static int [] zzUnpackRowMap() {
-    int [] result = new int[71];
+    int [] result = new int[72];
     int offset = 0;
     offset = zzUnpackRowMap(ZZ_ROWMAP_PACKED_0, offset, result);
     return result;
@@ -418,67 +420,61 @@ public class Lexer {
 
   private static final String ZZ_TRANS_PACKED_0 =
     "\1\2\1\3\1\4\1\2\1\3\1\5\1\2\1\6"+
-    "\1\7\1\10\1\11\1\10\2\12\1\13\1\14\1\7"+
-    "\1\15\1\16\1\17\6\7\1\20\1\7\1\2\2\7"+
-    "\1\21\1\7\1\22\2\7\1\23\2\7\1\24\2\7"+
-    "\1\2\55\0\1\4\50\0\7\6\1\25\43\6\1\7"+
-    "\7\0\1\7\6\0\15\7\1\0\16\7\1\26\2\0"+
-    "\51\26\2\0\13\26\1\27\15\26\1\30\16\26\1\31"+
-    "\5\0\7\31\1\32\1\31\1\33\32\31\1\0\1\7"+
-    "\7\0\1\7\6\0\11\7\1\34\3\7\1\0\17\7"+
-    "\7\0\1\7\6\0\4\7\1\35\10\7\1\0\17\7"+
-    "\7\0\1\7\6\0\10\7\1\36\2\7\1\37\1\7"+
-    "\1\0\17\7\7\0\1\7\6\0\6\7\1\40\6\7"+
-    "\1\0\17\7\7\0\1\7\6\0\15\7\1\0\1\41"+
-    "\16\7\7\0\1\7\6\0\15\7\1\0\7\7\1\42"+
-    "\2\7\1\43\4\7\7\0\1\7\6\0\15\7\1\0"+
-    "\14\7\1\44\2\7\7\0\1\7\6\0\15\7\1\0"+
-    "\5\7\1\40\10\7\2\27\1\0\2\27\1\0\45\27"+
-    "\13\0\1\45\37\0\1\31\5\0\11\31\1\46\32\31"+
-    "\1\0\1\7\7\0\1\7\6\0\7\7\1\47\5\7"+
-    "\1\0\17\7\7\0\1\7\6\0\5\7\1\50\7\7"+
-    "\1\0\17\7\7\0\1\7\6\0\14\7\1\51\1\0"+
-    "\17\7\7\0\1\7\6\0\2\7\1\52\12\7\1\0"+
-    "\17\7\7\0\1\7\6\0\15\7\1\0\3\7\1\53"+
-    "\13\7\7\0\1\7\6\0\15\7\1\0\13\7\1\54"+
-    "\3\7\7\0\1\7\6\0\15\7\1\0\2\7\1\55"+
-    "\14\7\7\0\1\7\6\0\15\7\1\0\6\7\1\56"+
-    "\7\7\13\45\1\57\20\45\1\60\16\45\17\0\1\46"+
-    "\33\0\1\7\7\0\1\7\6\0\11\7\1\40\3\7"+
-    "\1\0\17\7\7\0\1\7\6\0\6\7\1\61\6\7"+
-    "\1\0\17\7\7\0\1\7\6\0\11\7\1\62\3\7"+
-    "\1\0\17\7\7\0\1\7\6\0\12\7\1\63\2\7"+
-    "\1\0\17\7\7\0\1\7\6\0\15\7\1\0\4\7"+
-    "\1\64\12\7\7\0\1\7\6\0\15\7\1\0\4\7"+
-    "\1\65\3\7\1\66\6\7\7\0\1\7\6\0\15\7"+
-    "\1\0\11\7\1\67\5\7\7\0\1\7\6\0\15\7"+
-    "\1\0\4\7\1\65\11\7\13\45\1\57\2\45\1\0"+
-    "\47\45\1\70\20\45\1\60\16\45\1\7\7\0\1\7"+
-    "\6\0\10\7\1\71\4\7\1\0\17\7\7\0\1\7"+
-    "\6\0\10\7\1\72\4\7\1\0\17\7\7\0\1\7"+
-    "\6\0\6\7\1\73\6\7\1\0\17\7\7\0\1\7"+
-    "\6\0\15\7\1\0\7\7\1\74\7\7\7\0\1\7"+
-    "\6\0\15\7\1\0\11\7\1\75\5\7\7\0\1\7"+
-    "\6\0\15\7\1\0\7\7\1\76\7\7\7\0\1\7"+
-    "\6\0\15\7\1\0\5\7\1\77\10\7\13\45\1\57"+
-    "\2\45\1\100\34\45\1\7\7\0\1\7\6\0\6\7"+
-    "\1\101\6\7\1\0\17\7\7\0\1\7\6\0\2\7"+
-    "\1\102\12\7\1\0\17\7\7\0\1\7\6\0\1\7"+
-    "\1\71\13\7\1\0\17\7\7\0\1\7\6\0\15\7"+
-    "\1\0\1\40\16\7\7\0\1\7\6\0\15\7\1\0"+
-    "\10\7\1\40\6\7\7\0\1\7\6\0\15\7\1\0"+
-    "\2\7\1\103\14\7\7\0\1\7\6\0\15\7\1\0"+
-    "\1\7\1\104\15\7\7\0\1\7\6\0\12\7\1\40"+
-    "\2\7\1\0\17\7\7\0\1\7\6\0\4\7\1\105"+
-    "\10\7\1\0\17\7\7\0\1\7\6\0\15\7\1\0"+
-    "\4\7\1\106\12\7\7\0\1\7\6\0\15\7\1\0"+
-    "\5\7\1\107\11\7\7\0\1\7\6\0\13\7\1\40"+
-    "\1\7\1\0\17\7\7\0\1\7\6\0\15\7\1\0"+
-    "\12\7\1\40\4\7\7\0\1\7\6\0\15\7\1\0"+
-    "\11\7\1\40\4\7";
+    "\1\7\1\10\1\11\1\10\2\12\1\13\1\14\2\7"+
+    "\1\15\1\16\1\17\6\7\1\20\3\7\1\21\1\7"+
+    "\1\22\2\7\1\23\2\7\1\24\2\7\1\2\55\0"+
+    "\1\4\50\0\7\6\1\25\43\6\1\7\5\0\2\26"+
+    "\1\7\6\26\34\7\1\27\2\0\51\27\2\0\10\27"+
+    "\1\30\2\27\1\31\34\27\1\32\5\0\7\32\1\33"+
+    "\1\32\1\14\32\32\1\0\1\7\5\0\2\26\1\7"+
+    "\6\26\12\7\1\34\22\7\5\0\2\26\1\7\6\26"+
+    "\5\7\1\35\27\7\5\0\2\26\1\7\6\26\11\7"+
+    "\1\36\2\7\1\37\20\7\5\0\2\26\1\7\6\26"+
+    "\7\7\1\40\25\7\5\0\2\26\1\7\6\26\16\7"+
+    "\1\41\16\7\5\0\2\26\1\7\6\26\25\7\1\42"+
+    "\2\7\1\43\4\7\5\0\2\26\1\7\6\26\32\7"+
+    "\1\44\2\7\5\0\2\26\1\7\6\26\23\7\1\40"+
+    "\10\7\13\30\1\45\37\30\2\31\1\0\2\31\1\0"+
+    "\45\31\1\32\5\0\11\32\1\46\32\32\1\0\1\7"+
+    "\5\0\2\26\1\7\6\26\10\7\1\47\24\7\5\0"+
+    "\2\26\1\7\6\26\6\7\1\50\26\7\5\0\2\26"+
+    "\1\7\6\26\15\7\1\51\17\7\5\0\2\26\1\7"+
+    "\6\26\3\7\1\52\30\7\1\53\5\0\2\54\1\53"+
+    "\6\54\35\7\5\0\2\26\1\7\6\26\21\7\1\55"+
+    "\13\7\5\0\2\26\1\7\6\26\31\7\1\56\3\7"+
+    "\5\0\2\26\1\7\6\26\20\7\1\57\14\7\5\0"+
+    "\2\26\1\7\6\26\24\7\1\60\7\7\16\61\1\62"+
+    "\34\61\1\63\5\0\11\63\1\46\32\63\1\0\1\7"+
+    "\5\0\2\26\1\7\6\26\12\7\1\40\22\7\5\0"+
+    "\2\26\1\7\6\26\7\7\1\64\25\7\5\0\2\26"+
+    "\1\7\6\26\12\7\1\65\22\7\5\0\2\26\1\7"+
+    "\6\26\13\7\1\66\21\7\5\0\2\26\1\7\6\26"+
+    "\22\7\1\67\12\7\5\0\2\26\1\7\6\26\22\7"+
+    "\1\70\3\7\1\71\6\7\5\0\2\26\1\7\6\26"+
+    "\27\7\1\72\5\7\5\0\2\26\1\7\6\26\22\7"+
+    "\1\70\11\7\13\61\1\45\37\61\1\7\5\0\2\26"+
+    "\1\7\6\26\11\7\1\73\23\7\5\0\2\26\1\7"+
+    "\6\26\11\7\1\74\23\7\5\0\2\26\1\7\6\26"+
+    "\7\7\1\75\25\7\5\0\2\26\1\7\6\26\25\7"+
+    "\1\76\7\7\5\0\2\26\1\7\6\26\27\7\1\77"+
+    "\5\7\5\0\2\26\1\7\6\26\25\7\1\100\7\7"+
+    "\5\0\2\26\1\7\6\26\23\7\1\101\11\7\5\0"+
+    "\2\26\1\7\6\26\7\7\1\102\25\7\5\0\2\26"+
+    "\1\7\6\26\3\7\1\103\31\7\5\0\2\26\1\7"+
+    "\6\26\2\7\1\73\32\7\5\0\2\26\1\7\6\26"+
+    "\16\7\1\40\16\7\5\0\2\26\1\7\6\26\26\7"+
+    "\1\40\6\7\5\0\2\26\1\7\6\26\20\7\1\104"+
+    "\14\7\5\0\2\26\1\7\6\26\17\7\1\105\15\7"+
+    "\5\0\2\26\1\7\6\26\13\7\1\40\21\7\5\0"+
+    "\2\26\1\7\6\26\5\7\1\106\27\7\5\0\2\26"+
+    "\1\7\6\26\22\7\1\107\12\7\5\0\2\26\1\7"+
+    "\6\26\23\7\1\110\11\7\5\0\2\26\1\7\6\26"+
+    "\14\7\1\40\20\7\5\0\2\26\1\7\6\26\30\7"+
+    "\1\40\4\7\5\0\2\26\1\7\6\26\27\7\1\40"+
+    "\4\7";
 
   private static int [] zzUnpacktrans() {
-    int [] result = new int[2623];
+    int [] result = new int[2580];
     int offset = 0;
     offset = zzUnpacktrans(ZZ_TRANS_PACKED_0, offset, result);
     return result;
@@ -521,11 +517,11 @@ public class Lexer {
   private static final int [] ZZ_ATTRIBUTE = zzUnpackAttribute();
 
   private static final String ZZ_ATTRIBUTE_PACKED_0 =
-    "\1\0\3\11\20\1\2\11\2\1\1\11\25\1\1\0"+
-    "\10\1\1\0\7\1\1\11\7\1";
+    "\1\0\3\11\20\1\3\11\2\1\1\11\21\1\1\11"+
+    "\4\1\1\0\2\11\25\1";
 
   private static int [] zzUnpackAttribute() {
-    int [] result = new int[71];
+    int [] result = new int[72];
     int offset = 0;
     offset = zzUnpackAttribute(ZZ_ATTRIBUTE_PACKED_0, offset, result);
     return result;
@@ -602,11 +598,15 @@ public class Lexer {
   private boolean zzEOFDone;
 
   /* user code: */
+    private String errorDecimalPegado = " un numero o caracter de escape";
     private String errorGeneralizado = "cualquier caracter permitido";
     private String errorNumero = "un numero";
     private String errorCaracter = "un caracter de escape";
-    private String errorComentarioBloque = " (/) o (*/)";
+    private String errorComentarioBloque = "(/)";
+    private String errorComentarioBloque2 = " (*/)";
     private String errorCadena = " un \" ";
+    private String errorReservada = "un caracter de escape";
+    private String errorIdentificador = " caracter de escape, letra o digito";
     
     ArrayList<Token> tokens = new ArrayList<>();
     private void imprimirToken(String tipoToken,String lexema,int linea, int columna){
@@ -1040,92 +1040,107 @@ public class Lexer {
             { guardarToken(TipoToken.ERROR,errorGeneralizado);
             }
           // fall through
-          case 19: break;
+          case 22: break;
           case 2:
             { /*IGNORAMOS*/
             }
           // fall through
-          case 20: break;
+          case 23: break;
           case 3:
             { /*IGNORARLO*/
             }
           // fall through
-          case 21: break;
+          case 24: break;
           case 4:
             { guardarToken(TipoToken.ERROR,errorCadena);
             }
           // fall through
-          case 22: break;
+          case 25: break;
           case 5:
             { guardarToken(TipoToken.IDENTIFICADOR,null);
             }
           // fall through
-          case 23: break;
+          case 26: break;
           case 6:
             { guardarToken(TipoToken.OPERADOR,null);
             }
           // fall through
-          case 24: break;
+          case 27: break;
           case 7:
             { guardarToken(TipoToken.AGRUPACION,null);
             }
           // fall through
-          case 25: break;
+          case 28: break;
           case 8:
             { guardarToken(TipoToken.PUNTUACION,null);
             }
           // fall through
-          case 26: break;
+          case 29: break;
           case 9:
-            { /**/
+            { guardarToken(TipoToken.ENTERO,null);
             }
           // fall through
-          case 27: break;
+          case 30: break;
           case 10:
             { guardarToken(TipoToken.CADENA,null);
             }
           // fall through
-          case 28: break;
-          case 11:
-            { guardarToken(TipoToken.ERROR,errorCaracter);
-            }
-          // fall through
-          case 29: break;
-          case 12:
-            { guardarToken(TipoToken.COMENTARIO_LINEA,null);
-            }
-          // fall through
-          case 30: break;
-          case 13:
-            { guardarToken(TipoToken.ERROR,errorNumero);
-            }
-          // fall through
           case 31: break;
-          case 14:
-            { guardarToken(TipoToken.ENTERO,null);
+          case 11:
+            { guardarToken(TipoToken.ERROR,errorIdentificador);
             }
           // fall through
           case 32: break;
-          case 15:
-            { guardarToken(TipoToken.PALABRARESERVADA,null);
+          case 12:
+            { guardarToken(TipoToken.ERROR,errorCaracter);
             }
           // fall through
           case 33: break;
-          case 16:
-            { guardarToken(TipoToken.ERROR,errorComentarioBloque);
+          case 13:
+            { guardarToken(TipoToken.ERROR,errorComentarioBloque2);
             }
           // fall through
           case 34: break;
-          case 17:
-            { guardarToken(TipoToken.DECIMAL,null);
+          case 14:
+            { guardarToken(TipoToken.COMENTARIO_LINEA,null);
             }
           // fall through
           case 35: break;
-          case 18:
-            { guardarToken(TipoToken.COMENTARIO_BLOQUE,null);
+          case 15:
+            { guardarToken(TipoToken.ERROR,errorNumero);
             }
           // fall through
           case 36: break;
+          case 16:
+            { guardarToken(TipoToken.PALABRARESERVADA,null);
+            }
+          // fall through
+          case 37: break;
+          case 17:
+            { guardarToken(TipoToken.ERROR,errorComentarioBloque);
+            }
+          // fall through
+          case 38: break;
+          case 18:
+            { guardarToken(TipoToken.DECIMAL,null);
+            }
+          // fall through
+          case 39: break;
+          case 19:
+            { guardarToken(TipoToken.ERROR,errorReservada);
+            }
+          // fall through
+          case 40: break;
+          case 20:
+            { guardarToken(TipoToken.COMENTARIO_BLOQUE,null);
+            }
+          // fall through
+          case 41: break;
+          case 21:
+            { guardarToken(TipoToken.ERROR,errorDecimalPegado);
+            }
+          // fall through
+          case 42: break;
           default:
             zzScanError(ZZ_NO_MATCH);
         }

@@ -17,11 +17,15 @@ import java.util.ArrayList;
 
 /*CODIGO JAVA*/
 %{
+    private String errorDecimalPegado = " un numero o caracter de escape";
     private String errorGeneralizado = "cualquier caracter permitido";
     private String errorNumero = "un numero";
     private String errorCaracter = "un caracter de escape";
-    private String errorComentarioBloque = " (/) o (*/)";
+    private String errorComentarioBloque = "(/)";
+    private String errorComentarioBloque2 = " (*/)";
     private String errorCadena = " un \" ";
+    private String errorReservada = "un caracter de escape";
+    private String errorIdentificador = " caracter de escape, letra o digito";
     
     ArrayList<Token> tokens = new ArrayList<>();
     private void imprimirToken(String tipoToken,String lexema,int linea, int columna){
@@ -44,10 +48,13 @@ LineTerminator = \r|\n|\r\n
 WhiteSpace     = {LineTerminator} | [ \t\f]
 
 RESERVADA = "SI"|"si"|"ENTONCES"|"entonces"|"entero"|"numero"|"cadena"|"ESCRIBIR"|"escribir"|"DEFINIR"|"COMO"
+RESERVADA_PEGADA = {RESERVADA}[^a-zA-Z0-9\s]
 IDENTIFICADOR = [:jletter:] [:jletterdigit:]*
+IDENTIFICADOR_PEGADO = {IDENTIFICADOR}[^a-zA-Z0-9\s]
 DIGITO = [0-9]
 ENTERO = {DIGITO}+
-DECIMAL = {DIGITO}+\.{DIGITO}+  
+DECIMAL = {DIGITO}+\.{DIGITO}+
+DECIMAL_PEGADO = {DIGITO}+\.{DIGITO}+[^0-9\s]
 NUM_MAL = {DIGITO}+\.?[^0-9\s]? // de todo lo que puede haber mal
 
 
@@ -58,8 +65,10 @@ COMENTARIO_LINEA = "//"[^\r\n]*
 
 
 //COMENTARIO BLOQUE
-COMENTARIO_BLOQUE = "/\\*" ([^*]|\*+[^*/])* "\\*/"
-COMENTARIO_BLOQUE_ERRONEO = "/\\*" ([^*]|\*+[^*/])*
+COMENTARIO_BLOQUE = "/*" [^*]* "*" ([^/][^*]* "*")* "/"
+COMENTARIO_BLOQUE_ERRONEO = "/*" [^*]* "*" ([^/][^*]* "*")*
+COMENTARIO_BLOQUE_ERRONEO_2 = "/*" [^*]*
+
 
 
 SIGNO_PUNTUACION = "." | "," | ";" | ":"
@@ -75,18 +84,21 @@ AGRUPACION_PEGADO   = {AGRUPACION} [^ \t\n]
 {LineTerminator}    {/*IGNORARLO*/}
 {WhiteSpace}        {/*IGNORAMOS*/}
 
-{RESERVADA}         {guardarToken(TipoToken.PALABRARESERVADA,null);}
-{IDENTIFICADOR}     {guardarToken(TipoToken.IDENTIFICADOR,null);}
-{DIGITO}            {/**/} // ignorar
-{ENTERO}            {guardarToken(TipoToken.ENTERO,null);}
-{DECIMAL}           {guardarToken(TipoToken.DECIMAL,null);}
-{NUM_MAL}           {guardarToken(TipoToken.ERROR,errorNumero);}
+{RESERVADA}                     {guardarToken(TipoToken.PALABRARESERVADA,null);}
+{RESERVADA_PEGADA}              {guardarToken(TipoToken.ERROR,errorReservada);}
+{IDENTIFICADOR}                 {guardarToken(TipoToken.IDENTIFICADOR,null);}
+{IDENTIFICADOR_PEGADO}          {guardarToken(TipoToken.ERROR,errorIdentificador);}
+{ENTERO}                        {guardarToken(TipoToken.ENTERO,null);}
+{DECIMAL}                       {guardarToken(TipoToken.DECIMAL,null);}
+{DECIMAL_PEGADO}                {guardarToken(TipoToken.ERROR,errorDecimalPegado);}
+{NUM_MAL}                       {guardarToken(TipoToken.ERROR,errorNumero);}
 
 {CADENA}                        {guardarToken(TipoToken.CADENA,null);}
 {CADENA_INCOMPLETA}             {guardarToken(TipoToken.ERROR,errorCadena);}
 {COMENTARIO_LINEA}              {guardarToken(TipoToken.COMENTARIO_LINEA,null);}
 {COMENTARIO_BLOQUE}             {guardarToken(TipoToken.COMENTARIO_BLOQUE,null);}
 {COMENTARIO_BLOQUE_ERRONEO}     {guardarToken(TipoToken.ERROR,errorComentarioBloque);}
+{COMENTARIO_BLOQUE_ERRONEO_2}   {guardarToken(TipoToken.ERROR,errorComentarioBloque2);}
 
 {SIGNO_PUNTUACION}              {guardarToken(TipoToken.PUNTUACION,null);}
 {OPERADOR_ARITMETICO}           {guardarToken(TipoToken.OPERADOR,null);}
@@ -95,5 +107,8 @@ AGRUPACION_PEGADO   = {AGRUPACION} [^ \t\n]
 {PUNTUACION_PEGADO}             {guardarToken(TipoToken.ERROR,errorCaracter);}
 {OPERADOR_PEGADO}               {guardarToken(TipoToken.ERROR,errorCaracter);}
 {AGRUPACION_PEGADO}             {guardarToken(TipoToken.ERROR,errorCaracter);}
+
+
+{DIGITO}            {/**/} // ignorar // para no tener problemas 
 
 [^]                 {guardarToken(TipoToken.ERROR,errorGeneralizado);}

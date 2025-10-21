@@ -83,6 +83,10 @@ public class AnalizadorFrame extends javax.swing.JFrame {
             System.out.println("Error al analizar");
         }
         
+        ArrayList<Token> lista = lexer.getTokens();
+        for (Token token : lista) {
+            token.selfDescribe();
+        }
         return lexer.getTokens();
     }
     
