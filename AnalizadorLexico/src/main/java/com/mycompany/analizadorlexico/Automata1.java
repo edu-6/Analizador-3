@@ -1,9 +1,12 @@
-package com.mycompany.analizadorlexico.backend.automata;
+package com.mycompany.analizadorlexico;
 
+import com.mycompany.analizadorlexico.backend.automata.ReconocedorDeCaracter;
+import com.mycompany.analizadorlexico.backend.automata.TipoToken;
+import com.mycompany.analizadorlexico.backend.automata.Token;
 import com.mycompany.analizadorlexico.backend.depurador.Movimiento;
 import java.util.ArrayList;
 
-public class Automata {
+public class Automata1 {
 
     private static final int DIGITO = 0;
     private static final int LETRA = 1;
@@ -38,7 +41,7 @@ public class Automata {
     private String logs = "";
     private ArrayList<Movimiento> movimientos = new ArrayList<>();
     private boolean seGuardoToken = false;
-    public Automata() {
+    public Automata1() {
         // ESTADO 0
         transiciones[0][DIGITO] = 1;
         transiciones[0][LETRA] = 4;

@@ -34,8 +34,8 @@ public class ReportesPanel extends javax.swing.JPanel {
         this.creadorReportes = new CreadorReportes();
     }
 
-    public void crearReportes(ArrayList<Token> lista, String logs) {
-        this.consola = this.crearConsola(logs);
+    public void crearReportes(ArrayList<Token> lista) {
+        //this.consola = this.crearConsola(logs);
         if(lista == null){
             return;
         }

@@ -5,10 +5,11 @@
 package com.mycompany.analizadorlexico.backend.frontend;
 
 import com.mycompany.analizadorlexico.backend.BuscadorCadenas;
-import com.mycompany.analizadorlexico.backend.automata.Automata;
+import com.mycompany.analizadorlexico.backend.automata.Lexer;
 import com.mycompany.analizadorlexico.backend.automata.Token;
-import com.mycompany.analizadorlexico.backend.depurador.Depurador;
 import com.mycompany.analizadorlexico.backend.exceptions.CampoVacioException;
+import java.io.IOException;
+import java.io.StringReader;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
 
@@ -154,9 +155,15 @@ public class PanelOpciones extends javax.swing.JPanel {
 
     private void analizarBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_analizarBtnActionPerformed
         String texto = this.analizador.getEditorArea().getEditorTextPane().getText();
-        Automata automata = new Automata();
-            ArrayList<Token> tokens = automata.Analizar2(texto);
-            this.panelReportes.crearReportes(tokens, automata.getLogs());
+        Lexer lexer =  new Lexer(new StringReader(texto));
+        try {
+            lexer.yylex();
+        } catch (IOException ex) {
+            System.out.println("Error al analizar");
+        }
+        
+            ArrayList<Token> tokens = lexer.getTokens();
+            this.panelReportes.crearReportes(tokens);
             this.resultadosPanel.irAlPanelReportes();
     }//GEN-LAST:event_analizarBtnActionPerformed
 
@@ -165,12 +172,12 @@ public class PanelOpciones extends javax.swing.JPanel {
     }//GEN-LAST:event_limpiarBtnActionPerformed
 
     private void analizarBtn1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_analizarBtn1ActionPerformed
-        String texto = this.analizador.getEditorArea().getEditorTextPane().getText();
+        /*String texto = this.analizador.getEditorArea().getEditorTextPane().getText();
         Automata automata = new Automata();
         automata.Analizar2(texto); // analizar
         Depurador depurador = new Depurador(automata.getMovimientos());
         this.panelDepuracion.setDepurador(depurador);
-        this.resultadosPanel.irAlPanelDepurador();
+        this.resultadosPanel.irAlPanelDepurador();*/
     }//GEN-LAST:event_analizarBtn1ActionPerformed
 
 

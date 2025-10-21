@@ -6,12 +6,16 @@ package com.mycompany.analizadorlexico.backend.frontend;
 import com.mycompany.analizadorlexico.backend.ExportadorArchivo;
 import com.mycompany.analizadorlexico.backend.GestorArchivos;
 import com.mycompany.analizadorlexico.backend.LectorDeArchivos;
-import com.mycompany.analizadorlexico.backend.automata.Automata;
+import com.mycompany.analizadorlexico.backend.automata.Lexer;
 import com.mycompany.analizadorlexico.backend.automata.Token;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.io.File;
+import java.io.IOException;
+import java.io.StringReader;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.JTextPane;
@@ -72,8 +76,14 @@ public class AnalizadorFrame extends javax.swing.JFrame {
     }
 
     public ArrayList<Token> analizar() {
-        Automata automata = new Automata();
-        return automata.Analizar2(this.editorArea.getEditorTextPane().getText());
+        Lexer lexer =  new Lexer(new StringReader(this.editorArea.getEditorTextPane().getText()));
+        try {
+            lexer.yylex();
+        } catch (IOException ex) {
+            System.out.println("Error al analizar");
+        }
+        
+        return lexer.getTokens();
     }
     
     public void actualizarPosicionCursor(int fila, int columna){
