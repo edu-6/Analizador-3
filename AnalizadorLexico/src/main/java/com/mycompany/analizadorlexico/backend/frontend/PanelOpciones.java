@@ -53,7 +53,6 @@ public class PanelOpciones extends javax.swing.JPanel {
         analizarBtn = new javax.swing.JButton();
         limpiarBtn = new javax.swing.JButton();
         posicion = new javax.swing.JLabel();
-        analizarBtn1 = new javax.swing.JButton();
 
         setBackground(new java.awt.Color(153, 153, 153));
 
@@ -97,17 +96,6 @@ public class PanelOpciones extends javax.swing.JPanel {
         posicion.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 2));
         posicion.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
 
-        analizarBtn1.setBackground(new java.awt.Color(255, 153, 153));
-        analizarBtn1.setFont(new java.awt.Font("Liberation Sans", 1, 18)); // NOI18N
-        analizarBtn1.setText("Depurar");
-        analizarBtn1.setActionCommand("");
-        analizarBtn1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        analizarBtn1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                analizarBtn1ActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -123,17 +111,13 @@ public class PanelOpciones extends javax.swing.JPanel {
                 .addComponent(posicion, javax.swing.GroupLayout.PREFERRED_SIZE, 301, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(analizarBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(analizarBtn1, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(343, Short.MAX_VALUE))
+                .addContainerGap(510, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(analizarBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(analizarBtn1, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(analizarBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(posicion, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(areaBusquedaText, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -171,19 +155,9 @@ public class PanelOpciones extends javax.swing.JPanel {
         buscadorCadenas.limpiar(analizador.getEditorTextPane());
     }//GEN-LAST:event_limpiarBtnActionPerformed
 
-    private void analizarBtn1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_analizarBtn1ActionPerformed
-        /*String texto = this.analizador.getEditorArea().getEditorTextPane().getText();
-        Automata automata = new Automata();
-        automata.Analizar2(texto); // analizar
-        Depurador depurador = new Depurador(automata.getMovimientos());
-        this.panelDepuracion.setDepurador(depurador);
-        this.resultadosPanel.irAlPanelDepurador();*/
-    }//GEN-LAST:event_analizarBtn1ActionPerformed
-
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton analizarBtn;
-    private javax.swing.JButton analizarBtn1;
     private javax.swing.JTextField areaBusquedaText;
     private javax.swing.JButton buscarBtn;
     private javax.swing.JButton limpiarBtn;

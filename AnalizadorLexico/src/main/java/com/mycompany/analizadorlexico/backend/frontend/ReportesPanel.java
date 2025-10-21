@@ -120,7 +120,6 @@ public class ReportesPanel extends javax.swing.JPanel {
         jPanel1 = new javax.swing.JPanel();
         btnRecuento = new javax.swing.JButton();
         btnTokens = new javax.swing.JButton();
-        consolaBtn = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
 
         jPanel1.setBackground(new java.awt.Color(204, 255, 255));
@@ -145,24 +144,12 @@ public class ReportesPanel extends javax.swing.JPanel {
             }
         });
 
-        consolaBtn.setBackground(new java.awt.Color(204, 255, 204));
-        consolaBtn.setFont(new java.awt.Font("Liberation Sans", 1, 12)); // NOI18N
-        consolaBtn.setText("Consola");
-        consolaBtn.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-        consolaBtn.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                consolaBtnActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap(87, Short.MAX_VALUE)
-                .addComponent(consolaBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 223, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addContainerGap(80, Short.MAX_VALUE)
                 .addComponent(btnRecuento, javax.swing.GroupLayout.PREFERRED_SIZE, 211, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(btnTokens, javax.swing.GroupLayout.PREFERRED_SIZE, 223, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -174,8 +161,7 @@ public class ReportesPanel extends javax.swing.JPanel {
                 .addContainerGap(10, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnTokens, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnRecuento, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(consolaBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(btnRecuento, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
         );
 
@@ -206,15 +192,10 @@ public class ReportesPanel extends javax.swing.JPanel {
        this.jScrollPane1.setViewportView(tablaTokens);
     }//GEN-LAST:event_btnTokensActionPerformed
 
-    private void consolaBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_consolaBtnActionPerformed
-        this.jScrollPane1.setViewportView(consola);
-    }//GEN-LAST:event_consolaBtnActionPerformed
-
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnRecuento;
     private javax.swing.JButton btnTokens;
-    private javax.swing.JButton consolaBtn;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     // End of variables declaration//GEN-END:variables
