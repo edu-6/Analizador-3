@@ -47,10 +47,18 @@ import java.util.ArrayList;
 LineTerminator = \r|\n|\r\n
 WhiteSpace     = {LineTerminator} | [ \t\f]
 
-RESERVADA = "SI"|"si"|"ENTONCES"|"entonces"|"entero"|"numero"|"cadena"|"ESCRIBIR"|"escribir"|"DEFINIR"|"COMO"
+DATO_ENTERO = "entero" | "ENTERO"
+DATO_DECIMAL = "decimal" | "DECIMAL"
+DATO_CADENA = "cadena" | "CADENA"
+
+ESCRIBIR = "ESCRIBIR"| "escribir"
+DEFINIR = "DEFINIR" | "definir"
+COMO = "COMO" | "como"
+
+RESERVADA = "SI"|"si"|"ENTONCES"|"entonces"
 RESERVADA_PEGADA = {RESERVADA}[^a-zA-Z0-9\s]
 IDENTIFICADOR = [:jletter:] [:jletterdigit:]*
-IDENTIFICADOR_PEGADO = {IDENTIFICADOR}[^a-zA-Z0-9\s]
+IDENTIFICADOR_PEGADO = {IDENTIFICADOR}[^a-zA-Z0-9\s] | {DATO_ENTERO}[^a-zA-Z0-9\s] | {DATO_DECIMAL}[^a-zA-Z0-9\s] | {DATO_CADENA}[^a-zA-Z0-9\s] |  {DEFINIR}[^a-zA-Z0-9\s] | {ESCRIBIR}[^a-zA-Z0-9\s] |  {COMO}[^a-zA-Z0-9\s]
 DIGITO = [0-9]
 ENTERO = {DIGITO}+
 DECIMAL = {DIGITO}+\.{DIGITO}+
@@ -69,20 +77,35 @@ COMENTARIO_BLOQUE = "/*" [^*]* "*" ([^/][^*]* "*")* "/"
 COMENTARIO_BLOQUE_ERRONEO = "/*" [^*]* "*" ([^/][^*]* "*")*
 COMENTARIO_BLOQUE_ERRONEO_2 = "/*" [^*]*
 
+PUNTO_COMA = ";"
+MAS = "+"
+MENOS = "-"
+POR = "*"
+DIVISION = "/"
+IGUAL = "="
+P_APERTURA = "("
+P_CIERRE = ")"
 
+SIGNO_PUNTUACION = "." | ","| ":"
+OPERADOR_ARITMETICO =  "%"
+AGRUPACION = "[" | "]" | "{" | "}"
 
-SIGNO_PUNTUACION = "." | "," | ";" | ":"
-OPERADOR_ARITMETICO = "+" | "-" | "*" | "/" | "%" | "="
-AGRUPACION = "(" | ")" | "[" | "]" | "{" | "}"
-
-PUNTUACION_PEGADO        = {SIGNO_PUNTUACION} [^ \t\n]
-OPERADOR_PEGADO     = {OPERADOR_ARITMETICO} [^ \t\n]
-AGRUPACION_PEGADO   = {AGRUPACION} [^ \t\n]
+PUNTUACION_PEGADO        = {SIGNO_PUNTUACION} [^ \t\n] | {PUNTO_COMA} [^ \t\n]
+OPERADOR_PEGADO     = {OPERADOR_ARITMETICO} [^ \t\n] | {MAS} [^ \t\n] |{MENOS} [^ \t\n] | {POR} [^ \t\n] | {DIVISION} [^ \t\n] |{IGUAL} [^ \t\n]
+AGRUPACION_PEGADO   = {AGRUPACION} [^ \t\n] | {P_APERTURA} [^ \t\n] | {P_CIERRE} [^ \t\n]
 
 %%
 /*ACCIONES*/
 {LineTerminator}    {/*IGNORARLO*/}
 {WhiteSpace}        {/*IGNORAMOS*/}
+
+{DATO_ENTERO}                   {guardarToken(TipoToken.DATO_ENTERO,null);}
+{DATO_DECIMAL}                  {guardarToken(TipoToken.DATO_DECIMAL,null);}
+{DATO_CADENA}                   {guardarToken(TipoToken.DATO_CADENA,null);}
+{ESCRIBIR}                      {guardarToken(TipoToken.ESCRIBIR,null);}
+{DEFINIR}                       {guardarToken(TipoToken.DEFINIR,null);}
+{COMO}                          {guardarToken(TipoToken.COMO,null);}
+
 
 {RESERVADA}                     {guardarToken(TipoToken.PALABRARESERVADA,null);}
 {RESERVADA_PEGADA}              {guardarToken(TipoToken.ERROR,errorReservada);}
@@ -99,6 +122,16 @@ AGRUPACION_PEGADO   = {AGRUPACION} [^ \t\n]
 {COMENTARIO_BLOQUE}             {guardarToken(TipoToken.COMENTARIO_BLOQUE,null);}
 {COMENTARIO_BLOQUE_ERRONEO}     {guardarToken(TipoToken.ERROR,errorComentarioBloque);}
 {COMENTARIO_BLOQUE_ERRONEO_2}   {guardarToken(TipoToken.ERROR,errorComentarioBloque2);}
+
+{PUNTO_COMA}                    {guardarToken(TipoToken.PUNTO_COMA,null);}
+{MAS}                           {guardarToken(TipoToken.MAS,null);}
+{MENOS}                         {guardarToken(TipoToken.MENOS,null);}
+{POR}                           {guardarToken(TipoToken.POR,null);}
+{DIVISION}                      {guardarToken(TipoToken.DIVISION,null);}
+{IGUAL}                         {guardarToken(TipoToken.IGUAL,null);}
+{P_APERTURA}                    {guardarToken(TipoToken.P_APERTURA,null);}
+{P_CIERRE}                      {guardarToken(TipoToken.P_CIERRE,null);}
+
 
 {SIGNO_PUNTUACION}              {guardarToken(TipoToken.PUNTUACION,null);}
 {OPERADOR_ARITMETICO}           {guardarToken(TipoToken.OPERADOR,null);}

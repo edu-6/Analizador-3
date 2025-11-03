@@ -5,11 +5,16 @@
 package com.mycompany.analizadorlexico.backend.frontend;
 
 import com.mycompany.analizadorlexico.backend.CreadorReportes;
+import com.mycompany.analizadorlexico.backend.automata.Lexer;
 import com.mycompany.analizadorlexico.backend.automata.Token;
 import com.mycompany.analizadorlexico.backend.automata.TokenRecuento;
+import com.mycompany.analizadorlexico.backend.sintactico.Parser;
 import java.awt.Color;
 import java.awt.Font;
+import java.io.IOException;
+import java.io.StringReader;
 import java.util.ArrayList;
+import java.util.List;
 import javax.swing.JTable;
 import javax.swing.JTextArea;
 import javax.swing.table.DefaultTableModel;
@@ -25,13 +30,15 @@ public class ReportesPanel extends javax.swing.JPanel {
     private JTable tablaTokens;
     private JTable tablaErrores;
     private JTextArea consola;
+    private AnalizadorFrame framePrincipal;
 
     /**
      * Creates new form ReportesPanel
      */
-    public ReportesPanel() {
+    public ReportesPanel(AnalizadorFrame framePricipal) {
         initComponents();
         this.creadorReportes = new CreadorReportes();
+        this.framePrincipal = framePricipal;
     }
 
     public void crearReportes(ArrayList<Token> lista) {
@@ -59,10 +66,33 @@ public class ReportesPanel extends javax.swing.JPanel {
         
         this.btnTokens.setEnabled(botonesActivos);
         this.btnRecuento.setEnabled(botonesActivos);
+        this.bntSintactico.setEnabled(botonesActivos);
 
         this.revalidate();
         this.repaint();
         
+    }
+    
+    private void analizarSintacticamente(){
+        Lexer lexer =  new Lexer(new StringReader(framePrincipal.getEditorArea().getEditorTextPane().getText()));
+        try {
+            lexer.yylex();
+            ArrayList<Token> tokens = lexer.getTokens();
+            boolean hayErrores = this.creadorReportes.hayErrores(tokens);
+            if(!hayErrores){
+                ArrayList<Token> lista = creadorReportes.filtrarComentarios(tokens);
+                List<Token> lista2 = new ArrayList<>(lista); // parsear a lista
+                Parser parser = new Parser(lista2);
+                parser.parsear();
+                
+                JTextArea consola = crearConsola(parser.getLogs());
+                this.jScrollPane1.setViewportView(consola);
+            }else{
+                this.jScrollPane1.setViewportView(null);
+            }
+        } catch (IOException ex) {
+            //
+        }
     }
 
     private JTable crearTablaTokens(ArrayList<Token> lista) {
@@ -120,6 +150,7 @@ public class ReportesPanel extends javax.swing.JPanel {
         jPanel1 = new javax.swing.JPanel();
         btnRecuento = new javax.swing.JButton();
         btnTokens = new javax.swing.JButton();
+        bntSintactico = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
 
         jPanel1.setBackground(new java.awt.Color(204, 255, 255));
@@ -144,24 +175,37 @@ public class ReportesPanel extends javax.swing.JPanel {
             }
         });
 
+        bntSintactico.setBackground(new java.awt.Color(204, 204, 204));
+        bntSintactico.setFont(new java.awt.Font("Liberation Sans", 1, 12)); // NOI18N
+        bntSintactico.setText("Analisis sintactico");
+        bntSintactico.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        bntSintactico.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bntSintacticoActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap(80, Short.MAX_VALUE)
+                .addContainerGap(28, Short.MAX_VALUE)
                 .addComponent(btnRecuento, javax.swing.GroupLayout.PREFERRED_SIZE, 211, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(btnTokens, javax.swing.GroupLayout.PREFERRED_SIZE, 223, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(80, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(bntSintactico, javax.swing.GroupLayout.PREFERRED_SIZE, 223, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(28, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap(10, Short.MAX_VALUE)
+                .addContainerGap(16, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnTokens, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnRecuento, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(btnRecuento, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(bntSintactico, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
         );
 
@@ -179,7 +223,7 @@ public class ReportesPanel extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 340, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 334, Short.MAX_VALUE)
                 .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
@@ -192,8 +236,13 @@ public class ReportesPanel extends javax.swing.JPanel {
        this.jScrollPane1.setViewportView(tablaTokens);
     }//GEN-LAST:event_btnTokensActionPerformed
 
+    private void bntSintacticoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bntSintacticoActionPerformed
+        this.analizarSintacticamente();
+    }//GEN-LAST:event_bntSintacticoActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton bntSintactico;
     private javax.swing.JButton btnRecuento;
     private javax.swing.JButton btnTokens;
     private javax.swing.JPanel jPanel1;

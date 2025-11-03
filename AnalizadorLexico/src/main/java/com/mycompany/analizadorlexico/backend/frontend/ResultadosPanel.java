@@ -22,7 +22,7 @@ public class ResultadosPanel extends javax.swing.JPanel {
         initComponents();
         this.analizador = analizador;
         this.setLayout( new BorderLayout());
-        this.panelReportes = new ReportesPanel();
+        this.panelReportes = new ReportesPanel(analizador);
         this.panelDepuracion = new DepuracionPanel();
         this.panelOpciones = new PanelOpciones(analizador,this,panelReportes, panelDepuracion);
         this.add(panelOpciones, BorderLayout.CENTER);

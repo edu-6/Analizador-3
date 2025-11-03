@@ -19,5 +19,22 @@ public enum TipoToken {
     CADENA,
     AGRUPACION,
     PUNTUACION,
-    OPERADOR
+    OPERADOR,
+    
+    DATO_ENTERO,
+    DATO_DECIMAL,
+    DATO_CADENA,
+    ESCRIBIR,
+    DEFINIR,
+    COMO,
+    
+    PUNTO_COMA,
+    MAS,
+    MENOS,
+    POR,
+    DIVISION,
+    IGUAL,
+    P_APERTURA,
+    P_CIERRE
+
 }

@@ -138,6 +138,48 @@ public class Token {
             case tipoToken.ERROR:
                 this.color = new Color(255, 0, 0);
                 break;
+            case tipoToken.DATO_ENTERO:
+                this.color = Color.BLUE;
+                break;
+            case tipoToken.DATO_DECIMAL:
+                this.color = Color.BLUE;
+                break;
+            case tipoToken.DATO_CADENA:
+                this.color = Color.BLUE;
+                break;
+            case tipoToken.ESCRIBIR:
+                this.color = Color.BLUE;
+                break;
+            case tipoToken.DEFINIR:
+                this.color = Color.BLUE;
+                break;
+            case tipoToken.COMO:
+                this.color = Color.BLUE;
+                break;
+            case tipoToken.PUNTO_COMA:
+                this.color = Color.CYAN;
+                break;
+            case tipoToken.MAS:
+                this.color = Color.YELLOW;
+                break;
+            case tipoToken.MENOS:
+                this.color = Color.YELLOW;
+                break;
+            case tipoToken.POR:
+                this.color = Color.YELLOW;
+                break;
+            case tipoToken.DIVISION:
+                this.color = Color.YELLOW;
+                break;
+            case tipoToken.IGUAL:
+                this.color = Color.YELLOW;
+                break;
+            case tipoToken.P_APERTURA:
+                this.color = new Color(128, 0, 128);
+                break;
+            case tipoToken.P_CIERRE:
+               this.color = new Color(128, 0, 128);
+                break;
         }
     }
 
