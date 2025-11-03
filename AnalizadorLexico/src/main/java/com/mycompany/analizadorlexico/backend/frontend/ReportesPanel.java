@@ -8,6 +8,7 @@ import com.mycompany.analizadorlexico.backend.CreadorReportes;
 import com.mycompany.analizadorlexico.backend.automata.Lexer;
 import com.mycompany.analizadorlexico.backend.automata.Token;
 import com.mycompany.analizadorlexico.backend.automata.TokenRecuento;
+import com.mycompany.analizadorlexico.backend.sintactico.ErrorSintactico;
 import com.mycompany.analizadorlexico.backend.sintactico.Parser;
 import java.awt.Color;
 import java.awt.Font;
@@ -31,6 +32,7 @@ public class ReportesPanel extends javax.swing.JPanel {
     private JTable tablaErrores;
     private JTextArea consola;
     private AnalizadorFrame framePrincipal;
+    private ArrayList<ErrorSintactico> erroresSintacticos = null;
 
     /**
      * Creates new form ReportesPanel
@@ -79,12 +81,12 @@ public class ReportesPanel extends javax.swing.JPanel {
             lexer.yylex();
             ArrayList<Token> tokens = lexer.getTokens();
             boolean hayErrores = this.creadorReportes.hayErrores(tokens);
-            if(!hayErrores){
+            if(!hayErrores){ //errores lexicos
                 ArrayList<Token> lista = creadorReportes.filtrarComentarios(tokens);
                 List<Token> lista2 = new ArrayList<>(lista); // parsear a lista
                 Parser parser = new Parser(lista2);
                 parser.parsear();
-                
+                this.erroresSintacticos = parser.getErrores();
                 JTextArea consola = crearConsola(parser.getLogs());
                 this.jScrollPane1.setViewportView(consola);
             }else{
@@ -92,6 +94,18 @@ public class ReportesPanel extends javax.swing.JPanel {
             }
         } catch (IOException ex) {
             //
+        }
+    }
+    
+    private void mostrarErroresSintacticos(){
+        
+        if(this.erroresSintacticos != null){
+            String contenido = "";
+            for (ErrorSintactico error : erroresSintacticos) {
+                contenido+= error.getError()+"\n";
+            }
+            JTextArea consola = crearConsola(contenido);
+            this.jScrollPane1.setViewportView(consola);
         }
     }
 
@@ -151,6 +165,7 @@ public class ReportesPanel extends javax.swing.JPanel {
         btnRecuento = new javax.swing.JButton();
         btnTokens = new javax.swing.JButton();
         bntSintactico = new javax.swing.JButton();
+        btnErrorSintactico = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
 
         jPanel1.setBackground(new java.awt.Color(204, 255, 255));
@@ -185,18 +200,30 @@ public class ReportesPanel extends javax.swing.JPanel {
             }
         });
 
+        btnErrorSintactico.setBackground(new java.awt.Color(204, 204, 204));
+        btnErrorSintactico.setFont(new java.awt.Font("Liberation Sans", 1, 12)); // NOI18N
+        btnErrorSintactico.setText("Errores sintacticos");
+        btnErrorSintactico.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        btnErrorSintactico.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnErrorSintacticoActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap(28, Short.MAX_VALUE)
+                .addContainerGap(94, Short.MAX_VALUE)
                 .addComponent(btnRecuento, javax.swing.GroupLayout.PREFERRED_SIZE, 211, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(btnTokens, javax.swing.GroupLayout.PREFERRED_SIZE, 223, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(bntSintactico, javax.swing.GroupLayout.PREFERRED_SIZE, 223, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(28, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btnErrorSintactico, javax.swing.GroupLayout.PREFERRED_SIZE, 223, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(49, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -205,7 +232,8 @@ public class ReportesPanel extends javax.swing.JPanel {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnTokens, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnRecuento, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(bntSintactico, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(bntSintactico, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnErrorSintactico, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
         );
 
@@ -240,9 +268,14 @@ public class ReportesPanel extends javax.swing.JPanel {
         this.analizarSintacticamente();
     }//GEN-LAST:event_bntSintacticoActionPerformed
 
+    private void btnErrorSintacticoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnErrorSintacticoActionPerformed
+        this.mostrarErroresSintacticos();
+    }//GEN-LAST:event_btnErrorSintacticoActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton bntSintactico;
+    private javax.swing.JButton btnErrorSintactico;
     private javax.swing.JButton btnRecuento;
     private javax.swing.JButton btnTokens;
     private javax.swing.JPanel jPanel1;

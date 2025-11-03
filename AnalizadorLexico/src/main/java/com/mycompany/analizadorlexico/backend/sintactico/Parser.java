@@ -157,9 +157,7 @@ public class Parser {
                  encontrarTokenRelevante();
              }*/
         }
-        for (ErrorSintactico error : errores) {
-            System.out.println(error.getError());
-        }
+        
     }
     
     private boolean esRelevante(TipoToken tipo){
@@ -254,6 +252,11 @@ public class Parser {
         if(ultimoToken != null){
             this.errores.add(new ErrorSintactico( ultimoToken, cima, tipo));
         }
+    }
+    
+    
+    public ArrayList<ErrorSintactico> getErrores(){
+        return this.errores;
     }
     
     
